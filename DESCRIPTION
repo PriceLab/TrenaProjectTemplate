@@ -1,7 +1,7 @@
 Package: TrenaProjectTemplate
 Title: Template gene expression and variant data
 Date: 2019-01-31
-Version: 0.99.1
+Version: 0.99.2
 Authors@R: person("Paul", "Shannon", email = "pshannon@systemsbiology.org", role = c("aut", "cre"))
 Description: Trena and TrenaViz project example
 Imports: methods
