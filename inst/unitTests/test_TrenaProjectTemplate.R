@@ -68,39 +68,30 @@ test_setTargetGene <- function()
    message(sprintf("--- test_setTargetGene"))
 
    setTargetGene(tProj, "Abca1")
-   checkEquals(getTargetGene(tProj), "PGF")
+   checkEquals(getTargetGene(tProj), "Abca1")
 
    message(sprintf("    transcripts"))
    tbl.transcripts <- getTranscriptsTable(tProj)
-   checkTrue(nrow(tbl.transcripts) >= 9)
+   checkTrue(nrow(tbl.transcripts) >= 1)
 
    message(sprintf("    enhancers"))
    tbl.enhancers <- getEnhancers(tProj)
    checkEquals(colnames(tbl.enhancers), c("chrom", "start", "end", "type", "combinedScore", "geneSymbol"))
-   checkTrue(nrow(tbl.enhancers) >= 28)
+   checkTrue(nrow(tbl.enhancers) >= 0)
 
    message(sprintf("    encode DHS"))
    tbl.dhs <- getEncodeDHS(tProj)
-   checkTrue(nrow(tbl.dhs) > 1000)
-   checkEquals(colnames(tbl.dhs), c("chrom", "chromStart", "chromEnd", "count", "score"))
+   checkEquals(nrow(tbl.dhs), 0)
 
-   chromosome <- unique(c(tbl.dhs$chrom, tbl.enhancers$chrom))
-   checkEquals(length(chromosome), 1)
-   start <- min(tbl.dhs$chromStart)
-   end   <- max(tbl.dhs$chromEnd)
-
-   chromosome <- tbl.transcripts$chr[1]
-   start <- tbl.transcripts$start[1]
-   end <- start + 500
+   checkEquals(tbl.transcripts$chr, "chr4")
+   checkEquals(tbl.transcripts$start, 53030787)
+   checkEquals(tbl.transcripts$end , 53159895)
+   checkEquals(tbl.transcripts$tss, 53159895)
+   checkEquals(tbl.transcripts$strand, -1)
 
    message(sprintf("    ChIP-seq"))
    tbl.chipSeq <- getChipSeq(tProj, chrom=chromosome, start=start, end=end, tfs=NA)
-   checkTrue(nrow(tbl.chipSeq) > 40)
-   checkEquals(colnames(tbl.chipSeq), c("chrom", "start", "endpos", "tf", "name", "strand", "peakStart", "peakEnd"))
-
-   tbl.chipSeq.myc <- getChipSeq(tProj, chrom=chromosome, start=start, end=end, tfs="MYC")
-   checkTrue(nrow(tbl.chipSeq.myc) >= 4)
-   checkTrue(nrow(tbl.chipSeq.myc) < 10)
+   checkEquals(nrow(tbl.chipSeq), 0)
 
 } # test_setTargetGene
 #------------------------------------------------------------------------------------------------------------------------
