@@ -94,18 +94,20 @@ test_setTargetGene <- function()
    checkEquals(colnames(tbl.enhancers), c("chrom", "start", "end", "type", "combinedScore", "geneSymbol"))
    checkTrue(nrow(tbl.enhancers) >= 0)
 
-   message(sprintf("    geneGeneEnhancersRegion"))
-   region <- getGeneEnhancersRegion(tProj, flankingPercent=0)
-   checkTrue(all(c("chromLocString", "chrom", "start", "end") %in% names(region)))
-   checkEquals(region$chromLocString, "chr4:52901678-53289004")
+     # no enhancers, DHS or ChIP-seq for mouse
 
-   message(sprintf("    encode DHS"))
-   tbl.dhs <- getEncodeDHS(tProj)
-   checkEquals(nrow(tbl.dhs), 0)
+   #message(sprintf("    geneGeneEnhancersRegion"))
+   #region <- getGeneEnhancersRegion(tProj, flankingPercent=0)
+   #checkTrue(all(c("chromLocString", "chrom", "start", "end") %in% names(region)))
+   #checkEquals(region$chromLocString, "chr4:52901678-53289004")
 
-   message(sprintf("    ChIP-seq"))
-   tbl.chipSeq <- getChipSeq(tProj, chrom=chromosome, start=start, end=end, tfs=NA)
-   checkEquals(nrow(tbl.chipSeq), 0)
+   #message(sprintf("    encode DHS"))
+   #tbl.dhs <- getEncodeDHS(tProj)
+   #checkEquals(nrow(tbl.dhs), 0)
+
+   #message(sprintf("    ChIP-seq"))
+   #tbl.chipSeq <- getChipSeq(tProj, chrom=chromosome, start=start, end=end, tfs=NA)
+   #checkEquals(nrow(tbl.chipSeq), 0)
 
 } # test_setTargetGene
 #------------------------------------------------------------------------------------------------------------------------
